@@ -1,0 +1,147 @@
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Monitoramento Elétrico - CD</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <div class="tela-inicial" id="telaInicial">
+    <img src="img/Captura de tela 2025-06-06 122105.png" alt="Logo Grupo Muffato">
+    <h1>Sistema de Monitoramento da Manutenção Predial</h1>
+    <p>
+      Bem-vindo ao sistema de monitoramento inteligente do Centro de Distribuição Mello Peixoto.<br>
+      Esta área é exclusiva para a manutenção predial. Aqui você encontrará o projeto do CD,
+      os quadros de energia, um guia para troca de roletes no sorter e uma aba para registrar relatórios de manutenção.
+    </p>
+    <button onclick="entrarSistema()">Entrar no Sistema</button>
+    <button onclick="mostrarManualSorter()">Manual de Troca de Roletes (Sorter)</button>
+    <button onclick="mostrarRelatoriosSorter()">Relatórios de Manutenção do Sorter</button>
+    <button onclick="mostrarRelatoriosCD()">Relatórios de Manutenção Predial (Geral)</button>
+  </div>
+
+  <div id="interfaceSistema">
+    <div style="display: flex; height: 100%;">
+      <div class="sidebar">
+        <h3>Quadros de Energia</h3>
+        <button onclick="abrirFormularioCriarquadro()">➕ Criar quadro</button>
+        <input type="text" id="buscarQuadro" placeholder="Buscar Quadro..." onkeyup="filtrarQuadros()" />
+        <div id="listaQuadros"></div>
+      </div>
+      <div class="content">
+        <div class="planta-cd">
+          <p>[Planta do Centro de Distribuição]</p>
+        </div>
+        <div class="quadros" id="painelQuadros"></div>
+        <button onclick="voltarInicio()">Voltar à Tela Inicial</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="manualSorter">
+    <h2>Manual de Troca de Roletes (Sorter)</h2>
+    <ul>
+      <li>1. Desligue o painel principal responsável pelo trecho.</li>
+      <li>2. Identifique o tipo de rolete danificado.</li>
+      <li>3. Utilize as ferramentas adequadas para soltura lateral.</li>
+      <li>4. Substitua o rolete danificado pelo novo.</li>
+      <li>5. Ligue novamente o painel e teste o trecho.</li>
+    </ul>
+
+    <h3>Procedimento Operacional Padrão (POP) - Documento</h3>
+    <iframe src="pdfs/pop-troca-rolete.pdf" width="100%" height="600px" style="border: 1px solid #ccc; border-radius: 8px;"></iframe>
+
+    <button onclick="voltarInicio()">Voltar à Tela Inicial</button>
+  </div>
+
+  <div id="relatoriosSorter">
+    <h2>Relatórios de Manutenção - Sorter</h2>
+    <form id="formRelatorio">
+      <fieldset>
+        <legend>Adicionar Novo Relatório</legend>
+        <label>Data:<br><input type="date" id="dataRelatorio" required></label><br><br>
+        <label>Trecho:<br><input type="text" id="trechoRelatorio" required></label><br><br>
+        <label>Descrição:<br><textarea id="descricaoRelatorio" required rows="3"></textarea></label><br><br>
+        <label>Técnico:<br><input type="text" id="tecnicoRelatorio" required></label><br><br>
+        <button type="submit">Salvar Relatório</button>
+      </fieldset>
+    </form>
+
+    <table border="1" cellpadding="10">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Trecho</th>
+          <th>Descrição</th>
+          <th>Técnico</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaRelatorios"></tbody>
+    </table>
+    <br>
+    <button onclick="voltarInicio()">Voltar à Tela Inicial</button>
+  </div>
+
+  <div id="mostrarRelatoriosCD" style="display: none;">
+    <h2>Painel de Relatórios - Manutenção Predial</h2>
+    <form id="CDrelatorio">
+      <fieldset>
+        <legend>Adicionar Novo Relatório</legend>
+        <label>Data:<br><input type="date" id="dataRelatorio" required></label><br><br>
+        <label>Setor:<br><input type="text" id="SetorRelatorio" required></label><br><br>
+        <label>Descrição:<br><textarea id="descricaoRelatorio" required rows="3"></textarea></label><br><br>
+        <label>Técnico:<br><input type="text" id="tecnicoRelatorio" required></label><br><br>
+        <button type="submit">Salvar Relatório</button>
+      </fieldset>
+    </form>
+    <table border="1" cellpadding="10">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Setor</th>
+          <th>Descrição</th>
+          <th>Técnico</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaRelatorios"></tbody>
+    </table>
+    <br>
+    <button onclick="voltarInicio()">Voltar à Tela Inicial</button>
+  </div>
+  <div id="formCriarQuadro" style="display: none; position: fixed; top: 10%; left: 30%; background: white; padding: 20px; border: 2px solid #ccc; border-radius: 10px; z-index: 999; max-height: 80vh; overflow-y: auto;">
+  <h3>Criar Novo Quadro</h3>
+  <label>Nome do Quadro:<br><input type="text" id="nomeNovoQuadro" required></label><br><br>
+  <label>Quantidade de Disjuntores:<br>
+    <input type="number" id="qtdDisjuntores" min="1" max="50" value="4" required onchange="gerarCamposDisjuntores()">
+  </label><br><br>
+
+  <div id="camposDisjuntores"></div>
+
+  <button onclick="criarQuadroManual()">Criar</button>
+  <button onclick="fecharFormularioCriarQuadro()">Cancelar</button>
+</div>
+<div id="formEditarQuadro" style="display: none; position: fixed; top: 10%; left: 30%; background: white; padding: 20px; border: 2px solid #ccc; border-radius: 10px; z-index: 999; max-height: 80vh; overflow-y: auto;">
+  <h3>Editar Quadro</h3>
+  <input type="hidden" id="idQuadroEditar" />
+  <label>Nome do Quadro:<br>
+    <input type="text" id="nomeQuadroEditar" required />
+  </label><br><br>
+  <label>Quantidade de Disjuntores:<br>
+    <input type="number" id="qtdDisjuntoresEditar" min="1" max="50" required onchange="gerarCamposDisjuntoresEditar()" />
+  </label><br><br>
+  
+  <div id="camposDisjuntoresEditar"></div>
+  
+  <button onclick="salvarEdicaoQuadro()">Salvar</button>
+  <button onclick="fecharFormularioEditarQuadro()">Cancelar</button>
+</div>
+
+
+
+
+    
+
+  <script src="script.js"></script>
+</body>
+</html>

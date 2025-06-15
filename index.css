@@ -1,0 +1,334 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+.tela-inicial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 40px;
+  background-color: #ffffff;
+}
+.tela-inicial img {
+  max-width: 200px;
+  margin-bottom: 20px;
+}
+.tela-inicial h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+.tela-inicial p {
+  max-width: 600px;
+  margin: 0 auto 20px;
+  line-height: 1.5;
+}
+.tela-inicial button {
+  background-color: #25332b;
+  border: none;
+  padding: 12px 24px;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 5px;
+}
+.tela-inicial button:hover {
+  background-color: #16a34a;
+}
+#interfaceSistema, #manualSorter, #relatoriosSorter {
+  display: none;
+  height: 100vh;
+  flex-direction: column;
+  padding: 20px;
+}
+.sidebar {
+  width: 100px; /* melhor que 800px */
+  background-color: #f1f5f9;
+  padding: 20px;
+  border-right: 1px solid #000000;
+  overflow-y: auto;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+#listaQuadros {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+}
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+.planta-cd {
+  height: 250px;
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+.quadros {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 colunas */
+  gap: 16px;
+  padding-right: 10px;
+}
+
+.quadro {
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 5px;
+  width: 190px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.05);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.quadro h4 {
+  grid-column: span 2;
+  margin: 0 0 10px;
+}
+.dijuntor {
+  background-color: #e2e8f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 10px;
+}
+.dijuntor::before {
+  content: "\eb7b";
+  font-family: 'remixicon';
+  font-size: 18px;
+  color: #10b981;
+}
+.dijuntor.alerta::before {
+  content: "\eb98";
+  color: #ef4444;
+}
+.btn-excluir {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #ef4444;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-excluir:hover {
+  background-color: #dc2626;
+}
+#manualSorter, #relatoriosSorter {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+}
+form#formRelatorio {
+  margin-bottom: 20px;
+  width: 80%;
+}
+fieldset {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+}
+fieldset legend {
+  font-weight: bold;
+}
+form#formRelatorio label {
+  display: block;
+  margin-bottom: 10px;
+}
+form#formRelatorio input,
+form#formRelatorio textarea {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+form#formRelatorio button {
+  padding: 10px 20px;
+  background-color: #25332b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+form#formRelatorio button:hover {
+  background-color: #16a34a;
+}
+table {
+  border-collapse: collapse;
+  width: 80%;
+  text-align: left;
+}
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid #000000;
+}
+
+
+ #mostrarRelatoriosCD {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+}
+form#CDrelatorio {
+  margin-bottom: 20px;
+  width: 80%;
+}
+fieldset {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+}
+fieldset legend {
+  font-weight: bold;
+}
+form#CDrelatorio label {
+  display: block;
+  margin-bottom: 10px;
+}
+form#CDrelatorio input,
+form#CDrelatorio textarea {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+form#CDrelatorio button {
+  padding: 10px 20px;
+  background-color: #25332b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+form#CDrelatorio button:hover {
+  background-color: #16a34a;
+}
+table {
+  border-collapse: collapse;
+  width: 80%;
+  text-align: left;
+}
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid #000000;
+}
+h2 {
+  font-size: 26px;
+  color: #030507;
+  font-weight: bold;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+/* Estilo geral do modal */
+#formCriarQuadro,
+#formEditarQuadro {
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 200px; /* Limita largura máxima */
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 999;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+}
+
+
+/* Título do formulário */
+#formCriarQuadro h3,
+#formEditarQuadro h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #333;
+}
+
+/* Labels e inputs */
+#formCriarQuadro label,
+#formEditarQuadro label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+#formCriarQuadro input[type="text"],
+#formCriarQuadro input[type="number"],
+#formEditarQuadro input[type="text"],
+#formEditarQuadro input[type="number"] {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* Botões */
+#formCriarQuadro button,
+#formEditarQuadro button {
+  padding: 10px 15px;
+  margin-right: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+#formCriarQuadro button:hover,
+#formEditarQuadro button:hover {
+  opacity: 0.9;
+}
+
+/* Botão primário */
+#formCriarQuadro button:first-of-type,
+#formEditarQuadro button:first-of-type {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* Botão secundário */
+#formCriarQuadro button:last-of-type,
+#formEditarQuadro button:last-of-type {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+
+
